@@ -9,7 +9,10 @@ public class PlayerController : MonoBehaviour
     private float HInput;
     private float VInput;
 
-    public float speed;
+    public float moveSpeed;
+
+    public Vector3 playerDirecton;
+    public float turnSpeed = 250.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -20,16 +23,16 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HInput = Input.GetAxis("Horizontal");
-        VInput = Input.GetAxis("Vertical");
-
-        if (HInput != 0)
-        {
-            rigidbody.velocity = new Vector2(HInput * speed, rigidbody.velocity.y);
-        }
-        if (VInput != 0)
-        {
-            rigidbody.velocity = new Vector2(rigidbody.velocity.x, VInput * speed);
-        }
+        if(Input.GetKey(KeyCode.UpArrow))
+            transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
+        
+        if(Input.GetKey(KeyCode.DownArrow))
+            transform.Translate(-Vector3.up * moveSpeed * Time.deltaTime);
+        
+        if(Input.GetKey(KeyCode.LeftArrow))
+            transform.Rotate(Vector3.forward, turnSpeed * Time.deltaTime);
+        
+        if(Input.GetKey(KeyCode.RightArrow))
+            transform.Rotate(Vector3.forward, -turnSpeed * Time.deltaTime);
     }
 }
