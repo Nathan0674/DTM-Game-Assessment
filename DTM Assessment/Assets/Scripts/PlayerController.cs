@@ -4,35 +4,61 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody2D rigidbody;
+    private new Rigidbody2D rigidbody;
     
-    private float HInput;
-    private float VInput;
-
     public float moveSpeed;
+    public float currentSpeed;
+    public float maxSpeed = 4.0f;
 
-    public Vector3 playerDirecton;
     public float turnSpeed = 250.0f;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        currentSpeed = moveSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
         if(Input.GetKey(KeyCode.UpArrow))
-            transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
+            transform.Translate(Vector3.up * currentSpeed * Time.deltaTime);
+        
+            if (currentSpeed < maxSpeed)
+            {
+                currentSpeed *= 1.001f;
+            }
         
         if(Input.GetKey(KeyCode.DownArrow))
-            transform.Translate(-Vector3.up * moveSpeed * Time.deltaTime);
+            transform.Translate(-Vector3.up * currentSpeed * Time.deltaTime);
+
+            if (currentSpeed < maxSpeed)
+            {
+                currentSpeed *= 1.001f;
+            }
         
+        // Setting speed to 0 if not moving
+        if(!Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.UpArrow))
+        {
+            currentSpeed = moveSpeed;
+        }
+
         if(Input.GetKey(KeyCode.LeftArrow))
             transform.Rotate(Vector3.forward, turnSpeed * Time.deltaTime);
         
         if(Input.GetKey(KeyCode.RightArrow))
             transform.Rotate(Vector3.forward, -turnSpeed * Time.deltaTime);
+        
     }
+
+    // If player collides with food, destroy the food.
+    void OnCollisionEnter (Collision collision)
+    {
+        if (collision.gameObject.tag == "Food")
+        {
+            Debug.Log("e");
+        }
+    } 
 }
