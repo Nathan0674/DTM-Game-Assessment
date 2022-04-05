@@ -54,11 +54,11 @@ public class PlayerController : MonoBehaviour
     }
 
     // If player collides with food, destroy the food.
-    void OnCollisionEnter (Collision collision)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.tag == "Food")
+        if (other.gameObject.tag == "Food")
         {
-            Debug.Log("e");
+           Destroy(other.gameObject);
         }
     } 
 }
