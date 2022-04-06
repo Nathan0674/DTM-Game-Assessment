@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     public float currentSpeed;
     public float maxSpeed = 4.0f;
-
     public float turnSpeed = 250.0f;
     
 
@@ -59,6 +58,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Food")
         {
            Destroy(other.gameObject);
+           // currentFood = currentFood - 1;
         }
     } 
 }
