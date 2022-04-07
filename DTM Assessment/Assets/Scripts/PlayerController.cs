@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private new Rigidbody2D rigidbody;
+    private new Rigidbody2D rb2D;
+    private GameObject spawnManager;
     
     public float moveSpeed;
     public float currentSpeed;
@@ -15,35 +16,41 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        rb2D = GetComponent<Rigidbody2D>();
         currentSpeed = moveSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Detects if Up arrow is pressed, if yes, checks if the current player speed is less than the max speed.
+        // If this is true, slowly increases player speed until the maximum velocity is reached.
+        // If already at maximum speed, constant speed is maintained.
         if(Input.GetKey(KeyCode.UpArrow))
-            transform.Translate(Vector3.up * currentSpeed * Time.deltaTime);
+            rb2D.AddForce(transform.up * moveSpeed, ForceMode2D.Impulse); // transform.Translate(Vector3.up * currentSpeed * Time.deltaTime);
         
-            if (currentSpeed < maxSpeed)
-            {
-                currentSpeed *= 1.001f;
-            }
+            //if (currentSpeed < maxSpeed)
+            //{
+                //currentSpeed *= 1.001f;
+            //}
         
         if(Input.GetKey(KeyCode.DownArrow))
-            transform.Translate(-Vector3.up * currentSpeed * Time.deltaTime);
+            rb2D.AddForce(transform.up * -moveSpeed, ForceMode2D.Impulse); // transform.Translate(-Vector3.up * currentSpeed * Time.deltaTime);
 
-            if (currentSpeed < maxSpeed)
-            {
-                currentSpeed *= 1.001f;
-            }
+            //if (currentSpeed < maxSpeed)
+            //{
+               //currentSpeed *= 1.001f;
+            //}
         
-        // Setting speed to 0 if not moving
+        // Reducing speed to 0 if both up and down arrows are NOT pressed.
+        // When both keys are not pressed, slowly decreased speed to the minimum speed.
+        // If the currentSpeed variable is lower than 0.0, sets the currentSpeed to minSpeed. (minSpeed = 0.0f)
         if(!Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.UpArrow))
         {
             currentSpeed = moveSpeed;
         }
 
+        // Detects the left and right arrow key presses and rotates the player in the corresponsing direction at a constant rate.
         if(Input.GetKey(KeyCode.LeftArrow))
             transform.Rotate(Vector3.forward, turnSpeed * Time.deltaTime);
         
