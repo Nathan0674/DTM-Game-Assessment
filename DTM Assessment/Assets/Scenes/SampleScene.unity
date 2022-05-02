@@ -247,10 +247,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff070a66cab1e42448b5f1860bf5bd2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
-  currentSpeed: 0
-  maxSpeed: 5
-  turnSpeed: 100
+  moveSpeed: 0.5
+  turnSpeed: 200
+  script: {fileID: 0}
 --- !u!50 &110194726
 Rigidbody2D:
   serializedVersion: 4
@@ -424,7 +423,6 @@ MonoBehaviour:
   spawnY: 10
   Food: {fileID: 2457168354781906274, guid: d90ee5bd133d1d440975445a93a50c4f, type: 3}
   foodCap: 50
-  currentFood: 0
 --- !u!4 &788394517
 Transform:
   m_ObjectHideFlags: 0

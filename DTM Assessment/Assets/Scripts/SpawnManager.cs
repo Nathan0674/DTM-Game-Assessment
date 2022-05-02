@@ -12,7 +12,7 @@ public class SpawnManager : MonoBehaviour
     private Vector2 playerPos;
 
     public int foodCap = 50;
-    public int currentFood = 0;
+    public  int currentFood = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -30,13 +30,12 @@ public class SpawnManager : MonoBehaviour
 
     // This function clones the food prefab and spawns the prefab in a random position within a radius of the player.
     // Increases a counter that tracks the number of food in the scene. The maximum number of food prefabs is 50, if this is reached, stops spawning food.
-    void SpawnFood()
+    public void SpawnFood()
     {
         if (currentFood < foodCap)
         {
             Instantiate(Food, new Vector2(playerPos.x + Random.Range(-spawnX, spawnX), playerPos.y + Random.Range(-spawnY, spawnY)), Food.transform.rotation);
-            // currentFood = currentFood + 1;
-        }
-        
+            currentFood = currentFood + 1;
+        }    
     }
 }
