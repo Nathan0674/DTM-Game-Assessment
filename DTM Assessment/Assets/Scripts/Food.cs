@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FoddMovement : MonoBehaviour
+public class Food : MonoBehaviour
 {
     private Vector2 playerPos;
     private GameObject spawnManager;
@@ -22,7 +22,7 @@ public class FoddMovement : MonoBehaviour
     {
         playerPos = GameObject.Find("Player").transform.position;
 
-        if (Mathf.Abs(transform.position.y) <= playerPos.y + 15 || Mathf.Abs(transform.position.x) <= playerPos.x + 15)
+        if (Mathf.Abs(transform.position.y) >= playerPos.y + 15 || Mathf.Abs(transform.position.x) >= playerPos.x + 15)
         {
             Destroy(gameObject); 
             spawnManagerScript.currentFood -= 1;       

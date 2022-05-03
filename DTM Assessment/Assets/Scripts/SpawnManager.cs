@@ -18,7 +18,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         // Calls the spawnfood function in the first frame and repeats it.
-        InvokeRepeating("SpawnFood", 5.0f, 1.0f);
+        InvokeRepeating("SpawnFood", 3.0f, 1.0f);
     }
 
     // Update is called once per frame
