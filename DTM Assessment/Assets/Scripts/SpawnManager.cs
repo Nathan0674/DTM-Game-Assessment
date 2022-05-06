@@ -18,7 +18,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         // Calls the spawnfood function in the first frame and repeats it.
-        InvokeRepeating("SpawnFood", 3.0f, 1.0f);
+        InvokeRepeating("SpawnFood", 1.0f, 0.2f);
     }
 
     // Update is called once per frame
@@ -26,6 +26,7 @@ public class SpawnManager : MonoBehaviour
     {
         // Gets the player position so that the food can be spawned around the player and not in any random position.
         playerPos = GameObject.Find("Player").transform.position;
+        
     }
 
     // This function clones the food prefab and spawns the prefab in a random position within a radius of the player.
