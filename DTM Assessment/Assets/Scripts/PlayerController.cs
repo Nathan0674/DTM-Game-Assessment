@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     public float turnSpeed = 250.0f;
     private float currentSpeed;
 
+    public int score = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,16 +38,24 @@ public class PlayerController : MonoBehaviour
             transform.Rotate(Vector3.forward, turnSpeed * Time.deltaTime);
         
         if(Input.GetKey(KeyCode.RightArrow))
-            transform.Rotate(Vector3.forward, -turnSpeed * Time.deltaTime);
+            transform.Rotate(Vector3.forward, -turnSpeed * Time.deltaTime); 
     }
 
     // If player collides with food, destroy the food.
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Food")
+        if (other.gameObject.tag == "Food" || other.gameObject.tag == "LargeFood")
         {
             Destroy(other.gameObject);
             spawnManagerScript.currentFood -= 1;
+            score += 1;
+            
+            if(other.gameObject.tag == "LargeFood")
+            {
+                score += 4;
+            }
+
+            Debug.Log(score);
         }
     } 
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Food
   - Bound
+  - LargeFood
   layers:
   - Default
   - TransparentFX
