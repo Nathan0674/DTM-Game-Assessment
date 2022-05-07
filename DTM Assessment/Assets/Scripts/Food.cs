@@ -18,10 +18,12 @@ public class Food : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PositiveYBound = 20.0f;//GameObject.Find("TopLeftBound").GetComponent<Transform>().position.y;
-        PositiveXBound = 28.0f;//GameObject.Find("LowerRightBound").GetComponent<Transform>().position.x;
-        NegativeYBound = -22.0f;//GameObject.Find("LowerRightBound").GetComponent<Transform>().position.y;
-        NegativeXBound = -26.0f;//GameObject.Find("TopLeftBound").GetComponent<Transform>().position.x;
+        PositiveYBound = GameObject.Find("TopLeftBound").GetComponent<Transform>().position.y;
+        PositiveXBound = GameObject.Find("LowerRightBound").GetComponent<Transform>().position.x;
+        NegativeYBound = GameObject.Find("LowerRightBound").GetComponent<Transform>().position.y;
+        NegativeXBound = GameObject.Find("TopLeftBound").GetComponent<Transform>().position.x;
+
+        transform.Rotate(transform.forward * Random.Range(1, 360));
 
         // Allows me to access the "currentFood" variable:
         // Calls the SpawnManager Gameobject and grabs the SpawnManager script component.
@@ -29,6 +31,24 @@ public class Food : MonoBehaviour
         // This is needed so that the food count can update correctly when the instantiated food prefabs despawn.
         spawnManager = GameObject.Find("SpawnManager");
         spawnManagerScript = spawnManager.GetComponent<SpawnManager>();
+
+        if (foodDistance > DespawnDistance)
+        {
+            Destroy(gameObject); 
+            spawnManagerScript.currentFood -= 1;
+        }
+
+        if(transform.position.y > PositiveYBound || transform.position.y < NegativeYBound )
+        {
+            Destroy(gameObject); 
+            spawnManagerScript.currentFood -= 1; 
+        }
+
+        if(transform.position.x > PositiveXBound || transform.position.x < NegativeXBound )
+        {
+            Destroy(gameObject);
+            spawnManagerScript.currentFood -= 1; 
+        }
     }
 
     // Update is called once per frame
@@ -49,27 +69,7 @@ public class Food : MonoBehaviour
         if (foodDistance > DespawnDistance)
         {
             Destroy(gameObject); 
-            spawnManagerScript.currentFood -= 1;
-        }
-
-        if(transform.position.y > PositiveYBound || transform.position.y < NegativeYBound )
-        {
-            Destroy(gameObject); 
-            Debug.Log("Detected");
-            spawnManagerScript.currentFood -= 1; 
-        }
-
-        if(transform.position.x > PositiveXBound || transform.position.x < NegativeXBound )
-        {
-            Destroy(gameObject); 
-            Debug.Log("Detected");
-            spawnManagerScript.currentFood -= 1; 
+            spawnManagerScript.currentFood -= 1;       
         }
     }
-
-    void FindSpawnBounds()
-    {
-        
-    }
-
 }

@@ -8,6 +8,7 @@ public class SpawnManager : MonoBehaviour
     public float spawnY;
 
     public GameObject Food;
+    public GameObject LargeFood;
 
     private Vector2 playerPos;
 
@@ -17,8 +18,9 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Calls the spawnfood function in the first frame and repeats it.
-        InvokeRepeating("SpawnFood", 1.0f, 0.2f);
+        // Calls the spawnfood and spawnlargefood functions in the first frame and repeats it.
+        InvokeRepeating("SpawnFood", 1.0f, 1.0f);
+        InvokeRepeating("SpawnLargeFood", 1.0f, 5.0f);
     }
 
     // Update is called once per frame
@@ -36,6 +38,15 @@ public class SpawnManager : MonoBehaviour
         if (currentFood < foodCap)
         {
             Instantiate(Food, new Vector2(playerPos.x + Random.Range(-spawnX, spawnX), playerPos.y + Random.Range(-spawnY, spawnY)), Food.transform.rotation);
+            currentFood = currentFood + 1;
+        }    
+    }
+
+    public void SpawnLargeFood()
+    {
+        if (currentFood < foodCap)
+        {
+            Instantiate(LargeFood, new Vector2(playerPos.x + Random.Range(-spawnX, spawnX), playerPos.y + Random.Range(-spawnY, spawnY)), LargeFood.transform.rotation);
             currentFood = currentFood + 1;
         }    
     }
