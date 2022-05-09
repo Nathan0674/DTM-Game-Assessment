@@ -56,8 +56,11 @@ public class Food : MonoBehaviour
     void Update()
     {
         // Gets the player position as a Vector2 and asigns this value to the "playerPos" vector variable.
-        playerPos = GameObject.Find("Player").transform.position;
-
+        if (GameObject.Find("Player") != null)
+        {
+            playerPos = GameObject.Find("Player").transform.position;
+        }
+        
         // Gets the distance between the "Player" Object and individual "Food" prefabs using the Vector2.Distance method.
         // Assigns this value to the foodDistance variable.
         foodDistance = Vector2.Distance(playerPos, transform.position);

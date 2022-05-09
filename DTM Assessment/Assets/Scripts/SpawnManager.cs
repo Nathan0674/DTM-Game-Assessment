@@ -38,8 +38,8 @@ public class SpawnManager : MonoBehaviour
         NegativeXBound = GameObject.Find("TopLeftBound").GetComponent<Transform>().position.x;
 
         // Calls the spawnfood, spawnlargefood and spawnenemy functions in the first frame and repeats it.
-        InvokeRepeating("SpawnFood", 1.0f, 0.5f);
-        InvokeRepeating("SpawnLargeFood", 1.0f, 3.0f);
+        InvokeRepeating("SpawnFood", 1.0f, 0.8f);
+        InvokeRepeating("SpawnLargeFood", 1.0f, 4.0f);
         InvokeRepeating("SpawnEnemy", 4.0f, 4.0f);
     }
 
@@ -48,7 +48,10 @@ public class SpawnManager : MonoBehaviour
     {
         // Gets the player position so that the food can be spawned around the player and not in any random position. 
         // Asigns the Player's position to the playerPos variable.
-        playerPos = GameObject.Find("Player").transform.position;
+        if (GameObject.Find("Player") != null)
+        {
+            playerPos = GameObject.Find("Player").transform.position;
+        }
         
     }
 
